@@ -90,15 +90,11 @@ def procesar_cola():
             permiso_libre = False
             ocupado_por = siguiente
 
-def main():
-    with socket.socket() as s:
-        s.bind((HOST, PORT))
-        s.listen()
-        print(f"[Coordinador] Esperando conexiones en {HOST}:{PORT}...")
+with socket.socket() as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    print(f"[Coordinador] Esperando conexiones en {HOST}:{PORT}...")
 
-        while True:
-            conn, addr = s.accept()
-            threading.Thread(target=manejar_cliente, args=(conn, addr), daemon=True).start()
-
-if __name__ == "__main__":
-    main()
+    while True:
+        conn, addr = s.accept()
+        threading.Thread(target=manejar_cliente, args=(conn, addr), daemon=True).start()
